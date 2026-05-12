@@ -28,5 +28,8 @@ namespace simple_artifacterp_back.Models
 
         // CotizacionId
         public int QuotationId { get; set; }
+
+        // UltimaPersonaEdito
+        public string? LastEditedByName { get; set; }
     }
 }

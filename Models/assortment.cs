@@ -13,5 +13,8 @@
 
         // InsumosId
         public int SuppliesId { get; set; }
+
+        // UltimaPersonaEdito
+        public string? LastEditedByName { get; set; }
     }
 }
