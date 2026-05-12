@@ -13,8 +13,10 @@ namespace simple_artifacterp_back.Models
         // HashContrasena
         public string? PasswordHash { get; set; }
 
-        // NombreMostrado
-        public string? DisplayName { get; set; }
+        // NombreUsuario
+        public string? UserName { get; set; }
+
+        public string? profilePicture { get; set; }
 
         // GoogleId
         public string? GoogleId { get; set; }

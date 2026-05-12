@@ -25,6 +25,8 @@ namespace simple_artifacterp_back.Models
         // TipoProducto
         public ProductType ProductType { get; set; }
 
+        // Imagenes json
+        public string? Images { get; set; }
         // UltimaPersonaEdito
         public string? LastEditedByName { get; set; }
     }

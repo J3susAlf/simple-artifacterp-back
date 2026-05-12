@@ -19,8 +19,5 @@ namespace simple_artifacterp_back.Models
 
         // CotizacionVersionId
         public int QuotationVersionId { get; set; }
-
-        // UltimaPersonaEdito
-        public string? LastEditedByName { get; set; }
     }
 }

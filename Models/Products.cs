@@ -10,6 +10,8 @@ namespace simple_artifacterp_back.Models
 
         // Descripcion
         public string? Description { get; set; }
+        // Imagenes json
+        public string? Images { get; set; }
 
         // Cantidad
         public decimal Quantity { get; set; }

@@ -18,6 +18,8 @@ namespace simple_artifacterp_back.Models
 
         // Marca
         public string? Brand { get; set; }
+        // Imagen
+        public string? Image { get; set; }
 
         // UltimoCosto
         public decimal? LastCost { get; set; }

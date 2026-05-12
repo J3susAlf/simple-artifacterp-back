@@ -16,10 +16,14 @@ namespace simple_artifacterp_back.Models
         // Precio
         public decimal Price { get; set; }
 
+        // Imagen del activo representativo
+        public string? Image { get; set; }
+
         // Electricidad
         public decimal Electricity { get; set; }
 
         // TipoDesgaste
         public WearType WearType { get; set; }
+
     }
 }
