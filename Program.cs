@@ -1,11 +1,55 @@
+using Amazon.S3;
+using Amazon.S3.Model;
+using DotNetEnv;
+using MongoDB.Driver;
+using simple_artifacterp_back.Models;
+using simple_artifacterp_back.Swagger;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+Env.Load();
+
+var mongoUser = Environment.GetEnvironmentVariable("USER_DB");
+var mongoPassword = Environment.GetEnvironmentVariable("PASSWORD_DB");
+var mongoPort = Environment.GetEnvironmentVariable("PORT_DB");
+var mongoHost = Environment.GetEnvironmentVariable("HOST_DB") ?? "localhost";
+var escapedUser = Uri.EscapeDataString(mongoUser ?? string.Empty);
+var escapedPassword = Uri.EscapeDataString(mongoPassword ?? string.Empty);
+var mongoConnectionString = $"mongodb://{escapedUser}:{escapedPassword}@{mongoHost}:{mongoPort}";
+var mongoDatabaseName = "simple_artifacterp";
+
+builder.Services.AddSingleton(new MongoClient(mongoConnectionString));
+builder.Services.AddSingleton(sp => sp.GetRequiredService<MongoClient>().GetDatabase(mongoDatabaseName));
+
+var accessKey = Environment.GetEnvironmentVariable("ACCESS_KEY_BUCKET");
+var secretKey = Environment.GetEnvironmentVariable("SCRET_KEY_BUCKET");
+var bucketEndpoint = Environment.GetEnvironmentVariable("ENDPOINT_BUCKET");
+var bucketName = Environment.GetEnvironmentVariable("NAME_BUCKET");
+
+builder.Services.AddSingleton<IAmazonS3>(_ =>
+{
+    var config = new AmazonS3Config
+    {
+        ServiceURL = bucketEndpoint,
+        ForcePathStyle = true
+    };
+
+    return new AmazonS3Client(accessKey, secretKey, config);
+});
+builder.Services.AddSingleton(new S3BucketSettings
+{
+    BucketName = bucketName ?? string.Empty
+});
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.OperationFilter<FileUploadOperationFilter>();
+});
 
 var app = builder.Build();
 

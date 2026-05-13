@@ -16,6 +16,7 @@ namespace simple_artifacterp_back.Models
         // NombreUsuario
         public string? UserName { get; set; }
 
+        // FotoPerfil
         public string? profilePicture { get; set; }
 
         // GoogleId
