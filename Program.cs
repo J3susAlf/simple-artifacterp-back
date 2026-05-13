@@ -44,8 +44,9 @@ builder.Services.AddSingleton(new S3BucketSettings
     BucketName = bucketName ?? string.Empty
 });
 
-builder.Services.AddSingleton<IAssetsRepository, AssetsRepository>();
-builder.Services.AddSingleton<IAssortmentRepository, AssortmentRepository>();
+builder.Configuration["Jwt:Key"] ??= Environment.GetEnvironmentVariable("JWT_KEY") ?? "dev-secret-key";
+builder.Configuration["Jwt:Issuer"] ??= Environment.GetEnvironmentVariable("JWT_ISSUER") ?? "simple-artifacterp";
+builder.Configuration["Jwt:Audience"] ??= Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? "simple-artifacterp";
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
