@@ -3,6 +3,7 @@ using Amazon.S3.Model;
 using DotNetEnv;
 using MongoDB.Driver;
 using simple_artifacterp_back.Models;
+using simple_artifacterp_back.Repositories;
 using simple_artifacterp_back.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +43,9 @@ builder.Services.AddSingleton(new S3BucketSettings
 {
     BucketName = bucketName ?? string.Empty
 });
+
+builder.Services.AddSingleton<IAssetsRepository, AssetsRepository>();
+builder.Services.AddSingleton<IAssortmentRepository, AssortmentRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
