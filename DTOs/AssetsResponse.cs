@@ -1,32 +1,15 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using simple_artifacterp_back.Enums;
 
-namespace simple_artifacterp_back.Models
+namespace simple_artifacterp_back.DTOs
 {
-    public class Assets
+    public class AssetsResponse
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
-
-        // Nombre
         public string? Name { get; set; }
-
-        // Descripcion
         public string? Description { get; set; }
-
-        // Precio
         public decimal Price { get; set; }
-
-        // Imagen del activo representativo
         public string? Image { get; set; }
-
-        // Electricidad
         public decimal Electricity { get; set; }
-
-        // TipoDesgaste
         public WearType WearType { get; set; }
-
     }
 }

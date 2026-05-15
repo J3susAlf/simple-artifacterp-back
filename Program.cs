@@ -3,6 +3,8 @@ using Amazon.S3.Model;
 using DotNetEnv;
 using MongoDB.Driver;
 using simple_artifacterp_back.Models;
+using simple_artifacterp_back.Repositories;
+using simple_artifacterp_back.Services;
 using simple_artifacterp_back.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,7 +42,8 @@ builder.Services.AddSingleton<IAmazonS3>(_ =>
 });
 builder.Services.AddSingleton(new S3BucketSettings
 {
-    BucketName = bucketName ?? string.Empty
+    BucketName = bucketName ?? string.Empty,
+    ServiceUrl = bucketEndpoint ?? string.Empty
 });
 
 builder.Configuration["Jwt:Key"] ??= Environment.GetEnvironmentVariable("JWT_KEY") ?? "dev-secret-key";
@@ -55,6 +58,21 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<FileUploadOperationFilter>();
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+        policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
+
+builder.Services.AddScoped<AssetsRepository>();
+builder.Services.AddScoped<SuppliesRepository>();
+builder.Services.AddScoped<UnitsMeasurementRepository>();
+builder.Services.AddScoped<AssetsCatalogService>();
+builder.Services.AddScoped<SuppliesCatalogService>();
+builder.Services.AddScoped<UnitsMeasurementCatalogService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -65,6 +83,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

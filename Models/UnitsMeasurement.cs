@@ -1,9 +1,13 @@
-﻿namespace simple_artifacterp_back.Models
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace simple_artifacterp_back.Models
 {
     public class UnitsMeasurement
     {
-        // UnidadMedidaId
-        public int UnitsMeasurementId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
 
         // Nombre
         public string? Name { get; set; }
