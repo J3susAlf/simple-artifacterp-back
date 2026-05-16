@@ -18,6 +18,9 @@ namespace simple_artifacterp_back.Models
         // Fondo
         public string? Background { get; set; }
 
+        // Costo de electricidad
+        public double? CostOfElectricity { get; set; }
+
         // FechaActualizacion
         public DateTime UpdatedAt { get; set; }
     }

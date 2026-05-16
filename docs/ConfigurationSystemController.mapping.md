@@ -12,14 +12,74 @@
 {
   "id": "string",
   "commercialName": "string",
-  "logo": "string",
-  "background": "string",
+	"logo": "https://.../firma",
+	"background": "https://.../firma",
+	"costOfElectricity": 0,
   "updatedAt": "2024-01-01T00:00:00Z"
 }
 ```
 
 **Errores:**
 - 500: Error interno al acceder a MongoDB.
+
+---
+
+## GET /api/ConfigurationSystem
+**Descripción:** Obtiene la configuración del sistema.
+
+**Request:**
+- Body: vacío
+- URL: sin parámetros
+
+**Response 200:**
+```json
+{
+  "id": "string",
+  "commercialName": "string",
+  "logo": "string",
+  "background": "string",
+  "costOfElectricity": 0,
+  "updatedAt": "2024-01-01T00:00:00Z"
+}
+```
+
+**Errores:**
+- 404: No encontrado.
+- 500: Error interno.
+
+---
+
+## PUT /api/ConfigurationSystem/{id}
+**Descripción:** Actualiza la configuración del sistema (no permite cambiar Id ni UpdatedAt) y permite subir imagen de fondo.
+
+**Request:**
+- URL: id (obligatorio)
+- Content-Type: multipart/form-data
+- Body (form-data):
+  - commercialName (opcional)
+	- logo (opcional, string)
+  - logoFile (opcional, archivo logo)
+  - background (opcional, string)
+  - backgroundFile (opcional, archivo imagen)
+  - costOfElectricity (opcional)
+
+**Response 200:**
+```json
+{
+  "id": "string",
+  "commercialName": "string",
+  "logo": "string",
+  "background": "string",
+  "costOfElectricity": 0,
+  "updatedAt": "2024-01-01T00:00:00Z"
+}
+```
+
+**Errores:**
+- 404: No encontrado.
+- 400: "Solo se permiten imágenes."
+- 400: "Tipo de archivo de logo no permitido."
+- 500: Error interno.
 
 ---
 
