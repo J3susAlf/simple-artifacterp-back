@@ -1,0 +1,24 @@
+flowchart TD
+    A[Iniciar surtido] --> B{SuppliesId existe?}
+    B -- No --> B1[Error: insumo no encontrado]
+    B -- Si --> C[Capturar IsPack, PackQuantity, PurchaseQuantity, UnitaryPurchaseCost]
+    C --> D{Entrega inmediata?}
+    D -- Si --> E[Status = delivered; DeliveryDate = hoy]
+    E --> F[Crear Assortment]
+    F --> G[Calcular cantidad: PackQuantity * PurchaseQuantity]
+    G --> H[Calcular costo unitario: UnitaryPurchaseCost / PackQuantity si es pack]
+    H --> I[Upsert InventorySupplies y sumar AvailableQuantity]
+    I --> J[Actualizar Supplies.LastCost y IsActive]
+    D -- No --> K[Status = pending; DeliveryDate = fecha o manana]
+    K --> L[Crear Assortment]
+    L --> M[Esperar Finalizar Surtido]
+
+    M --> N[Finalizar Surtido]
+    N --> O[Status = delivered; DeliveryDate = hoy]
+    O --> P[Aplicar mismo proceso de inventario]
+
+    Q[Alta directa inventario] --> R{SuppliesId existe?}
+    R -- No --> R1[Error: insumo no encontrado]
+    R -- Si --> S[Upsert InventorySupplies y sumar AvailableQuantity]
+    S --> T[LastDispatchNumber = DirectAssortment]
+    T --> U[Actualizar Supplies.LastCost y IsActive]

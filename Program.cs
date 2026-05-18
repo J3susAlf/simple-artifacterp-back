@@ -69,9 +69,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<AssetsRepository>();
 builder.Services.AddScoped<SuppliesRepository>();
 builder.Services.AddScoped<UnitsMeasurementRepository>();
+builder.Services.AddScoped<AssortmentRepository>();
+builder.Services.AddScoped<InventorySuppliesRepository>();
 builder.Services.AddScoped<AssetsCatalogService>();
 builder.Services.AddScoped<SuppliesCatalogService>();
 builder.Services.AddScoped<UnitsMeasurementCatalogService>();
+builder.Services.AddScoped<InventoryAssortmentService>();
 
 var app = builder.Build();
 

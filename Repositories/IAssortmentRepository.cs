@@ -6,6 +6,7 @@ namespace simple_artifacterp_back.Repositories
     {
         Task<List<Assortment>> GetAllAsync();
         Task<Assortment?> GetByIdAsync(int id);
+        Task<int> GetNextIdAsync();
         Task CreateAsync(Assortment assortment);
         Task UpdateAsync(int id, Assortment assortment);
         Task DeleteAsync(int id);

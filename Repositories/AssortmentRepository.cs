@@ -20,6 +20,16 @@ namespace simple_artifacterp_back.Repositories
             return await _assortments.Find(x => x.AssortmentId == id).FirstOrDefaultAsync();
         }
 
+        public async Task<int> GetNextIdAsync()
+        {
+            var last = await _assortments.Find(_ => true)
+                .SortByDescending(x => x.AssortmentId)
+                .Limit(1)
+                .FirstOrDefaultAsync();
+
+            return (last?.AssortmentId ?? 0) + 1;
+        }
+
         public Task CreateAsync(Assortment assortment)
             => _assortments.InsertOneAsync(assortment);
 
