@@ -27,6 +27,12 @@ namespace simple_artifacterp_back.Models
         // UltimoCosto
         public decimal? LastCost { get; set; }
 
+        // CantidadBaseCosto
+        public decimal? CostQuantity { get; set; }
+
+        // CostoUnitario
+        public decimal? UnitCost { get; set; }
+
         // Descripcion
         public string? Description { get; set; }
 

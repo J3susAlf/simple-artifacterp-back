@@ -152,6 +152,8 @@ namespace simple_artifacterp_back.Services
             }
 
             supply.LastCost = request.LastCost;
+            supply.CostQuantity = request.CostQuantity ?? supply.CostQuantity;
+            NormalizeSupplyCosts(supply);
             if (inventory.AvailableQuantity > 0)
             {
                 supply.IsActive = true;
@@ -307,7 +309,12 @@ namespace simple_artifacterp_back.Services
                 await _inventoryRepository.UpdateAsync(inventory);
             }
 
-            supply.LastCost = unitCost;
+            supply.UnitCost = unitCost;
+            if (!supply.CostQuantity.HasValue || supply.CostQuantity.Value <= 0)
+            {
+                supply.CostQuantity = 1;
+            }
+            supply.LastCost = supply.UnitCost * supply.CostQuantity;
             if (inventory.AvailableQuantity > 0)
             {
                 supply.IsActive = true;
@@ -373,12 +380,29 @@ namespace simple_artifacterp_back.Services
                     Brand = supply.Brand,
                     Image = supply.Image,
                     LastCost = supply.LastCost,
+                    CostQuantity = supply.CostQuantity,
+                    UnitCost = supply.UnitCost,
                     Description = supply.Description,
                     IsActive = supply.IsActive,
                     Tax = supply.Tax,
                     UnitsMeasurementId = supply.UnitsMeasurementId
                 }
             };
+        }
+
+        private static void NormalizeSupplyCosts(Supplies supply)
+        {
+            if (supply.UnitCost.HasValue && supply.UnitCost.Value > 0)
+            {
+                return;
+            }
+
+            if (supply.LastCost.HasValue
+                && supply.CostQuantity.HasValue
+                && supply.CostQuantity.Value > 0)
+            {
+                supply.UnitCost = supply.LastCost.Value / supply.CostQuantity.Value;
+            }
         }
     }
 }

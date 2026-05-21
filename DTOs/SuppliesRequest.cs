@@ -12,6 +12,7 @@ namespace simple_artifacterp_back.DTOs
         public string? Image { get; set; }
         public IFormFile? ImageFile { get; set; }
         public decimal? LastCost { get; set; }
+        public decimal? CostQuantity { get; set; }
         public string? Description { get; set; }
         public bool IsActive { get; set; }
         public decimal? Tax { get; set; }

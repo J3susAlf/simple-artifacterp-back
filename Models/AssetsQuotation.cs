@@ -1,7 +1,14 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace simple_artifacterp_back.Models
 {
     public class AssetsQuotation
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
+
         // ActivosCotizacionId
         public int AssetsQuotationId { get; set; }
 
@@ -15,7 +22,7 @@ namespace simple_artifacterp_back.Models
         public decimal SubTotal { get; set; }
 
         // ActivosId
-        public int AssetsId { get; set; }
+        public string? AssetsId { get; set; }
 
         // CotizacionVersionId
         public int QuotationVersionId { get; set; }

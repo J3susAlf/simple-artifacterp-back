@@ -43,11 +43,14 @@ namespace simple_artifacterp_back.Services
                 Brand = request.Brand,
                 Image = request.Image,
                 LastCost = request.LastCost,
+                CostQuantity = request.CostQuantity,
                 Description = request.Description,
                 IsActive = request.IsActive,
                 Tax = request.Tax,
                 UnitsMeasurementId = request.UnitsMeasurementId
             };
+
+            NormalizeCosts(supply);
 
             await _repository.InsertAsync(supply);
             return await MapToResponseAsync(supply);
@@ -63,11 +66,14 @@ namespace simple_artifacterp_back.Services
                 Brand = request.Brand,
                 Image = imageKey,
                 LastCost = request.LastCost,
+                CostQuantity = request.CostQuantity,
                 Description = request.Description,
                 IsActive = request.IsActive,
                 Tax = request.Tax,
                 UnitsMeasurementId = request.UnitsMeasurementId
             };
+
+            NormalizeCosts(supply);
 
             await _repository.InsertAsync(supply);
             return await MapToResponseAsync(supply);
@@ -87,10 +93,13 @@ namespace simple_artifacterp_back.Services
             supply.Brand = request.Brand;
             supply.Image = request.Image;
             supply.LastCost = request.LastCost;
+            supply.CostQuantity = request.CostQuantity;
             supply.Description = request.Description;
             supply.IsActive = request.IsActive;
             supply.Tax = request.Tax;
             supply.UnitsMeasurementId = request.UnitsMeasurementId;
+
+            NormalizeCosts(supply);
 
             await _repository.UpdateAsync(supply);
             return await MapToResponseAsync(supply);
@@ -139,11 +148,28 @@ namespace simple_artifacterp_back.Services
                 Brand = supply.Brand,
                 Image = imageUrl,
                 LastCost = supply.LastCost,
+                CostQuantity = supply.CostQuantity,
+                UnitCost = supply.UnitCost,
                 Description = supply.Description,
                 IsActive = supply.IsActive,
                 Tax = supply.Tax,
                 UnitsMeasurementId = supply.UnitsMeasurementId
             };
+        }
+
+        private static void NormalizeCosts(Supplies supply)
+        {
+            if (supply.UnitCost.HasValue && supply.UnitCost.Value > 0)
+            {
+                return;
+            }
+
+            if (supply.LastCost.HasValue
+                && supply.CostQuantity.HasValue
+                && supply.CostQuantity.Value > 0)
+            {
+                supply.UnitCost = supply.LastCost.Value / supply.CostQuantity.Value;
+            }
         }
 
         private async Task<string?> BuildFileUrlAsync(string? key)

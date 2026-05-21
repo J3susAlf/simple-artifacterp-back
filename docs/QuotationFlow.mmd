@@ -1,0 +1,20 @@
+---
+id: quotation-flow
+title: Quotation Flow
+---
+flowchart TD
+    A[Usuario abre lista de cotizaciones] --> B[GET /api/quotations con filtros: year, month, productType, status, search]
+    B --> C[UI muestra: title, date, status, productType, images, lastEditedByName]
+    C --> D{Crear o editar}
+    D -->|Crear| E[GET /api/quotations/context - sin quotationId]
+    D -->|Editar| F[GET /api/quotations/context - quotationId=ID]
+    E --> G[Retorna catalogos, enums, costOfElectricity]
+    F --> G
+    G --> H[Usuario captura cotizacion + version + supplies + assets]
+    H --> I[Adjunta imagenes en la misma solicitud]
+    I --> J[POST /api/quotations o PUT /api/quotations/id]
+    J --> K[Valida datos y sube imagenes]
+    K --> L[Calcula costos: supplies + assets + labor + extraCosts]
+    L --> M[Guarda Quotation, QuotationVersion, SuppliesQuotation, AssetsQuotation]
+    M --> N[Respuesta: QuotationContextResponse]
+    N --> O[UI muestra detalle y totales]

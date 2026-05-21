@@ -16,6 +16,7 @@ erDiagram
     SUPPLIES ||--o{ ASSORTMENT : "comprado en"
     SUPPLIES ||--o{ INVENTORY_SUPPLIES : "registra"
     SUPPLIES ||--|| UNITS_MEASUREMENT : "usa"
+    UNITS_MEASUREMENT ||--o{ INVENTORY_SUPPLIES : "usa"
     PRODUCT ||--o{ INVENTORY_PRODUCT : "registra"
     SYSTEM_CONFIGURATION ||--|| SYSTEM_CONFIGURATION : "única"
 
@@ -64,6 +65,8 @@ erDiagram
         enum status
         string locationJson
         datetime date
+        decimal discount
+        decimal subTotal
         decimal totalCost
         string lastEditedByName
     }
@@ -94,7 +97,8 @@ erDiagram
     QUOTATION_VERSION {
         int quotationVersionId PK
         int quotationId FK
-        string description
+        bool isCurrent
+        string subDescription
         int versionNumber
         decimal profitMargin
         decimal profit
@@ -102,6 +106,7 @@ erDiagram
         decimal productTax
         decimal laborCost
         string lastEditedByName
+        decimal discount
     }
 
     ASSETS_QUOTATION {
@@ -155,20 +160,27 @@ erDiagram
     }
 
     ASSORTMENT {
-        int assortmentId PK
-        int suppliesId FK
-        decimal totalPurchaseCost
+        string id PK
+        int assortmentId
+        decimal unitaryPurchaseCost
+        boolean isPack
+        int packQuantity
         int purchaseQuantity
+        string suppliesId FK
         string lastEditedByName
+        enum status
+        datetime deliveryDate
     }
 
     INVENTORY_SUPPLIES {
-        int inventorySuppliesId PK
-        int suppliesId FK
+        string id PK
+        int inventorySuppliesId
         decimal availableQuantity
         decimal minimumQuantity
         decimal committedQuantity
-        decimal lastDispatchNumber
+        string unitsMeasurementId FK
+        string suppliesId FK
+        string lastDispatchNumber
     }
 
     INVENTORY_PRODUCT {

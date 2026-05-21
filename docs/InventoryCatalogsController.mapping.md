@@ -113,8 +113,11 @@
 
 **Response 200:**
 ```json
-{ "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "images/supplies/name-type-yyyymmdd-guid", "lastCost": 0, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
+{ "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "images/supplies/name-type-yyyymmdd-guid", "lastCost": 0, "costQuantity": 1000, "unitCost": 0.5, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
 ```
+
+**Notas:**
+- `unitCost` se calcula en el servidor con `lastCost / costQuantity`.
 
 **Errores:**
 - 400: "Archivo requerido." / "Solo se permiten imágenes."
@@ -225,9 +228,12 @@
 **Response 200:**
 ```json
 [
-  { "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "string", "lastCost": 0, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
+  { "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "string", "lastCost": 0, "costQuantity": 1000, "unitCost": 0.5, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
 ]
 ```
+
+**Notas:**
+- `unitCost` se calcula en el servidor con `lastCost / costQuantity`.
 
 **Errores:**
 - 500: Error interno.
@@ -242,8 +248,11 @@
 
 **Response 200:**
 ```json
-{ "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "string", "lastCost": 0, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
+{ "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "string", "lastCost": 0, "costQuantity": 1000, "unitCost": 0.5, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
 ```
+
+**Notas:**
+- `unitCost` se calcula en el servidor con `lastCost / costQuantity`.
 
 **Errores:**
 - 404: No encontrado.
@@ -264,6 +273,7 @@
   - image (opcional, string)
   - imageFile (opcional, archivo imagen)
   - lastCost (opcional)
+  - costQuantity (opcional)
   - description (opcional)
   - isActive (obligatorio)
   - tax (opcional)
@@ -271,7 +281,7 @@
 
 **Response 200:**
 ```json
-{ "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "string", "lastCost": 0, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
+{ "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "string", "lastCost": 0, "costQuantity": 1000, "unitCost": 0.5, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
 ```
 
 **Errores:**
@@ -292,6 +302,7 @@
   - brand (opcional)
   - image (opcional)
   - lastCost (opcional)
+  - costQuantity (opcional)
   - description (opcional)
   - isActive (obligatorio)
   - tax (opcional)
@@ -299,7 +310,7 @@
 
 **Response 200:**
 ```json
-{ "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "string", "lastCost": 0, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
+{ "id": "string", "type": 0, "name": "string", "color": 0, "brand": "string", "image": "string", "lastCost": 0, "costQuantity": 1000, "unitCost": 0.5, "description": "string", "isActive": true, "tax": 0, "unitsMeasurementId": 0 }
 ```
 
 **Errores:**

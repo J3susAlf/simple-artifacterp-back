@@ -1,12 +1,19 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace simple_artifacterp_back.Models
 {
     public class QuotationVersion
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
+
         // CotizacionVersionId
         public int QuotationVersionId { get; set; }
 
         // Descripcion
-        public string? Description { get; set; }
+        public string? SubDescription { get; set; }
 
         // NumeroVersion
         public int VersionNumber { get; set; }
@@ -31,5 +38,12 @@ namespace simple_artifacterp_back.Models
 
         // UltimaPersonaEdito
         public string? LastEditedByName { get; set; }
+        // Descuento
+        public decimal Discount { get; set; }
+
+        // SubTotal
+        public decimal SubTotal { get; set; }
+        // total
+        public decimal TotalCost { get; set; }
     }
 }

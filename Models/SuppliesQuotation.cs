@@ -1,7 +1,14 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace simple_artifacterp_back.Models
 {
     public class SuppliesQuotation
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
+
         // InsumosCotizacionId
         public int SuppliesQuotationId { get; set; }
 
@@ -15,7 +22,7 @@ namespace simple_artifacterp_back.Models
         public decimal SubTotal { get; set; }
 
         // InsumoId
-        public int SuppliesId { get; set; }
+        public string? SuppliesId { get; set; }
 
         // CotizacionVersionId
         public int QuotationVersionId { get; set; }

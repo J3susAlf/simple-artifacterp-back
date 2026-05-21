@@ -71,10 +71,16 @@ builder.Services.AddScoped<SuppliesRepository>();
 builder.Services.AddScoped<UnitsMeasurementRepository>();
 builder.Services.AddScoped<AssortmentRepository>();
 builder.Services.AddScoped<InventorySuppliesRepository>();
+builder.Services.AddScoped<QuotationRepository>();
+builder.Services.AddScoped<QuotationVersionRepository>();
+builder.Services.AddScoped<SuppliesQuotationRepository>();
+builder.Services.AddScoped<AssetsQuotationRepository>();
 builder.Services.AddScoped<AssetsCatalogService>();
 builder.Services.AddScoped<SuppliesCatalogService>();
 builder.Services.AddScoped<UnitsMeasurementCatalogService>();
 builder.Services.AddScoped<InventoryAssortmentService>();
+builder.Services.AddScoped<QuotationPricingService>();
+builder.Services.AddScoped<QuotationService>();
 
 var app = builder.Build();
 

@@ -36,5 +36,9 @@ namespace simple_artifacterp_back.Models
 
         // UltimaPersonaEdito
         public string? LastEditedByName { get; set; }
+        // Descuento
+        public decimal Discount { get; set; }
+        // SubTotal
+        public decimal SubTotal { get; set; }
     }
 }

@@ -82,9 +82,13 @@
   "committedQuantity": 0,
   "unitsMeasurementId": "string",
   "lastCost": 100,
+  "costQuantity": 1000,
   "lastEditedByName": "string"
 }
 ```
+
+**Notas:**
+- `unitCost` se calcula en el servidor con `lastCost / costQuantity`.
 
 **Response 200:**
 ```json
@@ -136,6 +140,8 @@
       "brand": "string",
       "image": "string",
       "lastCost": 100,
+      "costQuantity": 1000,
+      "unitCost": 0.5,
       "description": "string",
       "isActive": true,
       "tax": 0,
@@ -173,6 +179,8 @@
       "brand": "string",
       "image": "string",
       "lastCost": 100,
+      "costQuantity": 1000,
+      "unitCost": 0.5,
       "description": "string",
       "isActive": true,
       "tax": 0,

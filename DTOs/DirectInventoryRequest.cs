@@ -8,6 +8,7 @@ namespace simple_artifacterp_back.DTOs
         public decimal CommittedQuantity { get; set; }
         public string? UnitsMeasurementId { get; set; }
         public decimal LastCost { get; set; }
+        public decimal? CostQuantity { get; set; }
         public string? LastEditedByName { get; set; }
     }
 }

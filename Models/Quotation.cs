@@ -1,9 +1,15 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using simple_artifacterp_back.Enums;
 
 namespace simple_artifacterp_back.Models
 {
     public class Quotation
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
+
         // CotizacionId
         public int QuotationId { get; set; }
 
@@ -20,7 +26,7 @@ namespace simple_artifacterp_back.Models
         public string? Description { get; set; }
 
         // Estado
-        public string? Status { get; set; }
+        public QuoteStatus Status { get; set; }
 
         // TipoProducto
         public ProductType ProductType { get; set; }
