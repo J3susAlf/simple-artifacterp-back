@@ -62,12 +62,12 @@ namespace simple_artifacterp_back.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Password))
+            if (string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
             {
-                return BadRequest("Contraseña requerida.");
+                return BadRequest("Usuario y contraseña requeridos.");
             }
 
-            var user = await _users.Find(u => u.Email == request.Email || u.UserName == request.UserName).FirstOrDefaultAsync();
+            var user = await _users.Find(u => u.UserName == request.UserName).FirstOrDefaultAsync();
             if (user == null || string.IsNullOrWhiteSpace(user.PasswordHash) || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
             {
                 return Unauthorized("Credenciales inválidas.");
