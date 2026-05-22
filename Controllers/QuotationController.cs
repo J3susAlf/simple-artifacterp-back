@@ -17,7 +17,7 @@ namespace simple_artifacterp_back.Controllers
             _quotationService = quotationService;
         }
 
-        [HttpGet]
+        [HttpGet("GetQuotations")]
         public async Task<IActionResult> GetQuotations(
             [FromQuery] int? year,
             [FromQuery] int? month,
@@ -39,14 +39,14 @@ namespace simple_artifacterp_back.Controllers
             return Ok(result);
         }
 
-        [HttpGet("context")]
+        [HttpGet("GetQuotationContext")]
         public async Task<IActionResult> GetQuotationContext([FromQuery] int? quotationId)
         {
             var result = await _quotationService.GetContextAsync(quotationId);
             return result == null ? NotFound() : Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("CreateQuotation")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateQuotation([FromForm] QuotationUpsertRequest request)
         {
@@ -66,7 +66,7 @@ namespace simple_artifacterp_back.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateQuotation/{id}")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UpdateQuotation(int id, [FromForm] QuotationUpsertRequest request)
         {
